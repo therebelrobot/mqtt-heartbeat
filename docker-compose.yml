@@ -1,0 +1,17 @@
+services:
+  heartbeat:
+    build: .
+    container_name: mqtt-heartbeat
+    restart: unless-stopped
+    environment:
+      MQTT_URL: "mqtt://192.168.1.50:1883"  # your EMQX LAN IP
+      TOPIC_PREFIX: "lan/rpi"
+      HEARTBEAT_INTERVAL_SEC: "15"
+      QOS: "1"
+      RETAIN_STATUS: "true"
+      # Optional auth if you enable it in EMQX:
+      # MQTT_USERNAME: "hb"
+      # MQTT_PASSWORD: "supersecret"
+      # Optional explicit node id; otherwise hostname is used:
+      # NODE_ID: "rpi-garage"
+      LOG_LEVEL: "info"
